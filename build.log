@@ -1,0 +1,99 @@
+Flutter 3.50.0 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision ab2912035e (10 days ago) • 2026-11-09 08:50:21 -0800
+Engine • hash bf601093ad255aaf5c6d0fc5c4f9acfa60943b2a (revision 371f77202a) (10 days ago) • 2026-11-09 15:57:36.000Z
+Tools • Dart 3.14.0 • DevTools 2.61.0
+Resolving dependencies...
+Downloading packages...
+  flutter_lints 5.0.0 (6.0.0 available)
+  lints 5.1.1 (6.1.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  test_api 0.7.14 (0.7.15 available)
+  vector_math 2.4.3 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing gss-counselling...                                    
+
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • integration_test/app_flow_test.dart:11:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/main.dart:3:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/models.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/common/account_sheet.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/common/careers_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/common/chat_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/common/help_now_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/common/login_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/add_staff_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/career_edit_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/counsellor_shell.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/dashboard_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/inbox_screen.dart:3:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/manage_appointments_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/counsellor/students_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/my_cases_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/new_case_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/profile_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/student_appointments_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/student_home.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/student_shell.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/screens/student/tips_screen.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/theme.dart:1:1 • deprecated_member_use
+   info • 'package:flutter/material.dart' is deprecated and shouldn't be used. Use package:material_ui/material_ui.dart instead. This feature was deprecated after v3.47.0-0.0.pre. Try replacing the use of the deprecated member with the replacement • lib/widgets/common.dart:1:1 • deprecated_member_use
+
+24 issues found. (ran in 4.6s)
+
+::group::✅ Passing tests
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT01 login identity admission number is normalised into the login email
+✅ /home/runner/work/gss-counselling/gss-counselling/test/widget_test.dart: admission number becomes a login email (must match the Edge Function)
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT02 topics and streams unknown keys fall back safely
+✅ /home/runner/work/gss-counselling/gss-counselling/test/widget_test.dart: unknown topic falls back to "Something else"
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT03 career model fromMap and toRow round-trip
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT04 unread logic a counsellor reply the student has not read is unread
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT04 unread logic read replies and the student's own messages are not unread
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT05 messages and appointments message parsing keeps sender role and hides student identity
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT05 messages and appointments appointment in the future is upcoming
+✅ /home/runner/work/gss-counselling/gss-counselling/test/unit_test.dart: UT06 time labels very recent times show "now"
+::endgroup::
+
+🎉 10 tests passed.
+Running Gradle task 'assembleRelease'...                        
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Settings file '/home/runner/work/gss-counselling/gss-counselling/android/settings.gradle.kts' line: 20
+
+* What went wrong:
+Error resolving plugin [id: 'dev.flutter.flutter-plugin-loader', version: '1.0.0']
+> A problem occurred configuring project ':gradle'.
+   > Could not resolve all artifacts for configuration 'classpath'.
+      > Could not find org.jetbrains.kotlin:kotlin-stdlib:2.3.20.
+        Searched in the following locations:
+          - https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-stdlib/2.3.20/kotlin-stdlib-2.3.20.pom
+        Required by:
+            buildscript of project ':gradle'
+            buildscript of project ':gradle' > org.gradle.kotlin.kotlin-dsl:org.gradle.kotlin.kotlin-dsl.gradle.plugin:6.5.7 > org.gradle.kotlin:gradle-kotlin-dsl-plugins:6.5.7
+      > Could not resolve org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20.
+        Required by:
+            buildscript of project ':gradle' > org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:2.2.20
+         > Could not resolve org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20.
+            > Could not parse POM https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.3.20/kotlin-gradle-plugin-2.3.20.pom
+               > Could not find org.jetbrains.kotlin:kotlin-gradle-plugins-bom:2.3.20.
+                 Searched in the following locations:
+                   - https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugins-bom/2.3.20/kotlin-gradle-plugins-bom-2.3.20.pom
+      > Could not find org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.3.20.
+        Searched in the following locations:
+          - https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.3.20/kotlin-gradle-plugin-api-2.3.20.pom
+        Required by:
+            buildscript of project ':gradle' > org.gradle.kotlin.kotlin-dsl:org.gradle.kotlin.kotlin-dsl.gradle.plugin:6.5.7 > org.gradle.kotlin:gradle-kotlin-dsl-plugins:6.5.7
+> There are 3 more failures with identical causes.
+
+* Try:
+> If the artifact you are trying to retrieve can be found in the repository but without metadata in 'Maven POM' format, you need to adjust the 'metadataSources { ... }' of the repository declaration.
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 22s
+Running Gradle task 'assembleRelease'...                           23.3s
+Gradle task assembleRelease failed with exit code 1
