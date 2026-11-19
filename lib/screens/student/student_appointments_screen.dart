@@ -198,6 +198,7 @@ class _BookSessionScreenState extends State<BookSessionScreen> {
               final d = _days[i];
               final sel = d == _day;
               return GestureDetector(
+                key: ValueKey('day-$i'),
                 onTap: () => setState(() {
                   _day = d;
                   _hour = null;
@@ -232,6 +233,7 @@ class _BookSessionScreenState extends State<BookSessionScreen> {
               final past = _slot(h).isBefore(now.add(const Duration(minutes: 30)));
               final sel = _hour == h;
               return ChoiceChip(
+                key: ValueKey('slot-$h'),
                 label: Text(DateFormat.jm().format(_slot(h))),
                 selected: sel,
                 showCheckmark: false,
@@ -249,6 +251,7 @@ class _BookSessionScreenState extends State<BookSessionScreen> {
         ]),
         const SizedBox(height: 22),
         TextField(
+          key: const ValueKey('booking-reason'),
           controller: _reason,
           maxLines: 3,
           maxLength: 500,
@@ -269,7 +272,10 @@ class _BookSessionScreenState extends State<BookSessionScreen> {
           ]),
         ),
         const SizedBox(height: 20),
-        FilledButton(onPressed: _busy ? null : _submit, child: Text(_busy ? 'Sending…' : 'Request this time')),
+        FilledButton(
+            key: const ValueKey('request-slot'),
+            onPressed: _busy ? null : _submit,
+            child: Text(_busy ? 'Sending…' : 'Request this time')),
       ]),
     );
   }

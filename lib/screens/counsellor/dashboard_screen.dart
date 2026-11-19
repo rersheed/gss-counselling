@@ -74,6 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ]),
               ),
               GestureDetector(
+                key: const ValueKey('staff-avatar'),
                 onTap: () => showAccountSheet(context, me, extra: [
                   if (me.isAdmin)
                     ListTile(
