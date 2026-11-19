@@ -33,7 +33,25 @@ Future<void> waitFor(Finder f, {int seconds = 25}) async {
   throw TestFailure('Timed out after ${seconds}s waiting for $f');
 }
 
+final _vertical = find.byWidgetPredicate(
+    (w) => w is Scrollable && (w.axisDirection == AxisDirection.down || w.axisDirection == AxisDirection.up));
+
+/// Hides the keyboard and scrolls down until [f] has been built (lazy lists
+/// only build what is on screen).
+Future<void> reveal(Finder f) async {
+  await t.pump(const Duration(milliseconds: 300));
+  if (f.evaluate().isNotEmpty) return;
+  FocusManager.instance.primaryFocus?.unfocus();
+  await t.pump(const Duration(milliseconds: 500));
+  for (var i = 0; i < 15 && f.evaluate().isEmpty; i++) {
+    if (_vertical.evaluate().isEmpty) break;
+    await t.drag(_vertical.first, const Offset(0, -300), warnIfMissed: false);
+    await t.pump(const Duration(milliseconds: 350));
+  }
+}
+
 Future<void> tap(Finder f) async {
+  await reveal(f);
   await waitFor(f);
   await t.ensureVisible(f.first);
   await t.pump(const Duration(milliseconds: 300));
@@ -42,6 +60,7 @@ Future<void> tap(Finder f) async {
 }
 
 Future<void> type(Finder f, String text) async {
+  await reveal(f);
   await waitFor(f);
   await t.ensureVisible(f.first);
   await t.enterText(f.first, text);
@@ -70,7 +89,7 @@ Future<void> step(String id, String name, Future<void> Function() body) async {
     try {
       await binding.takeScreenshot('FAIL_$id');
     } catch (_) {}
-    rethrow;
+    // Keep going so later steps still report; the test fails at the end.
   }
 }
 
@@ -269,5 +288,7 @@ void main() {
     });
 
     binding.reportData = {'steps': results};
+    final failed = results.where((r) => r['status'] == 'FAIL').map((r) => r['id']).toList();
+    if (failed.isNotEmpty) fail('Failed steps: $failed');
   });
 }
