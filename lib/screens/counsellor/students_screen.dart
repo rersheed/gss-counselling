@@ -18,7 +18,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
 
   Future<void> _reload() async {
     final f = Api.students();
-    setState(() => _future = f);
+    setState(() { _future = f; });
     await f.catchError((_) => <Profile>[]);
   }
 
@@ -90,6 +90,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: () => _open(const AddStudentScreen()),
         icon: const Icon(Icons.person_add_alt_1_rounded),
         label: const Text('Add student'),

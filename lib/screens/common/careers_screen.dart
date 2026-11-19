@@ -93,6 +93,7 @@ class _CareersScreenState extends State<CareersScreen> {
       appBar: AppBar(title: Text(me.isStaff ? 'Career information' : 'Explore careers')),
       floatingActionButton: me.isStaff
           ? FloatingActionButton.extended(
+        heroTag: null,
               key: const ValueKey('add-career'),
               onPressed: () async {
                 await Navigator.push(context, MaterialPageRoute(builder: (_) => const CareerEditScreen()));

@@ -17,7 +17,7 @@ class _ManageAppointmentsScreenState extends State<ManageAppointmentsScreen> {
 
   Future<void> _reload() async {
     final f = Api.allAppointments();
-    setState(() => _future = f);
+    setState(() { _future = f; });
     await f.catchError((_) => <Appointment>[]);
   }
 

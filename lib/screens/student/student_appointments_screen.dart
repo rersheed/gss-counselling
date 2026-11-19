@@ -18,7 +18,7 @@ class _StudentAppointmentsScreenState extends State<StudentAppointmentsScreen> {
 
   Future<void> _reload() async {
     final f = Api.myAppointments();
-    setState(() => _future = f);
+    setState(() { _future = f; });
     await f.catchError((_) => <Appointment>[]);
   }
 
@@ -53,6 +53,7 @@ class _StudentAppointmentsScreenState extends State<StudentAppointmentsScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Sessions')),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: _book,
         icon: const Icon(Icons.event_available_rounded),
         label: const Text('Book a session'),

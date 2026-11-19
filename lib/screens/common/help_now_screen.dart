@@ -103,7 +103,7 @@ class _HelpNowScreenState extends State<HelpNowScreen> {
                 ),
               if (snap.hasError)
                 TextButton(
-                  onPressed: () => setState(() => _lines = Api.helplines()),
+                  onPressed: () => setState(() { _lines = Api.helplines(); }),
                   child: const Text('Reload numbers'),
                 ),
             ]);

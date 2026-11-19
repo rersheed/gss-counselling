@@ -17,7 +17,7 @@ class _MyCasesScreenState extends State<MyCasesScreen> {
 
   Future<void> _reload() async {
     final f = Api.myCases();
-    setState(() => _future = f);
+    setState(() { _future = f; });
     await f.catchError((_) => <CaseItem>[]);
   }
 
@@ -31,6 +31,7 @@ class _MyCasesScreenState extends State<MyCasesScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('My chats')),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: _new,
         icon: const Icon(Icons.add_rounded),
         label: const Text('New chat'),
