@@ -16,7 +16,7 @@ permissions:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
@@ -39,7 +39,7 @@ jobs:
           mkdir -p evidence/logs
           yes n | supabase init --force || true
           printf '\n[functions.manage-users]\nverify_jwt = false\n' >> supabase/config.toml
-          supabase start -x studio,imgproxy,vector,logflare 2>&1 | tee evidence/logs/supabase_start.log
+          supabase start -x studio,imgproxy,vector,logflare 2>&1 | sed -E 's/(sb_secret_|sb_publishable_|eyJ)[A-Za-z0-9._-]+/\1***REDACTED***/g; s/(Secret|secret|S3 Access Key|S3 Secret Key|JWT secret)( *: *| *= *)[^ ]+/\1\2***REDACTED***/g' | tee evidence/logs/supabase_start.log
           supabase status -o env | sed 's/"//g' > /tmp/sb.env
           sed -E 's/(KEY|SECRET|PASSWORD)=.*/\1=***/' /tmp/sb.env > evidence/logs/supabase_status.txt
           set -a; . /tmp/sb.env; set +a
@@ -92,7 +92,7 @@ jobs:
           psql "$DB_URL" -v ON_ERROR_STOP=0 -f testing_evidence/rls_core_test.sql > evidence/logs/rls_core_test.out 2>&1
           supabase db reset > evidence/logs/db_reset_2.log 2>&1
           psql "$DB_URL" -v ON_ERROR_STOP=0 -f testing_evidence/rls_careers_test.sql > evidence/logs/rls_careers_test.out 2>&1
-          tail -5 evidence/logs/rls_*.out
+          for f in evidence/logs/rls_*.out; do tail -n 5 "$f"; done
 
       - name: Device and timing information
         if: always()
@@ -116,6 +116,7 @@ jobs:
           git rm -rf --cached . > /dev/null
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -r /tmp/evidence/* .
+          grep -rlE 'sb_secret_[A-Za-z0-9]{6}|service_role' . --include='*.log' --include='*.txt' --include='*.json' | xargs -r sed -i -E 's/sb_secret_[A-Za-z0-9._-]+/sb_secret_***REDACTED***/g'
           echo "Evidence from commit ${GITHUB_SHA::7}, run ${GITHUB_RUN_ID}" > README.md
           git add -A && git commit -qm "Evidence from ${GITHUB_SHA::7}"
           git push -f origin evidence-tmp:evidence

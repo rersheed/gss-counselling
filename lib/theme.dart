@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Calm green + warm amber palette — soft, friendly, and close to the
 /// school's green. Inspired by counselling-app shots on Dribbble.
@@ -30,8 +29,9 @@ ThemeData buildTheme() {
     error: AppColors.danger,
     surface: AppColors.surface,
   );
-  final base = ThemeData(useMaterial3: true, colorScheme: scheme);
-  final text = GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
+  final base = ThemeData(useMaterial3: true, colorScheme: scheme, fontFamily: 'PlusJakartaSans');
+  final text = base.textTheme.apply(
+    fontFamily: 'PlusJakartaSans',
     bodyColor: AppColors.ink,
     displayColor: AppColors.ink,
   );
