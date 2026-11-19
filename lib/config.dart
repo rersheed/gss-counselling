@@ -3,11 +3,11 @@
 class AppConfig {
   static const supabaseUrl = String.fromEnvironment(
     'SUPABASE_URL',
-    defaultValue: 'https://YOUR-PROJECT-REF.supabase.co',
+    defaultValue: 'https://kpxdqytqcqelbiutknub.supabase.co',
   );
   static const supabaseAnonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',
-    defaultValue: 'YOUR-ANON-PUBLIC-KEY',
+    defaultValue: 'sb_publishable_ZpChElZf-5f5xsTSSB5g6Q_CVI4_YxD',
   );
 
   /// Students log in with admission number + PIN. Behind the scenes the

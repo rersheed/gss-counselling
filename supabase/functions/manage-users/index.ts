@@ -16,8 +16,21 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
-const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
+// Works with both the legacy service_role key and the newer sb_secret_ keys.
+function serviceKey(): string {
+  const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (legacy) return legacy;
+  const raw = Deno.env.get("SUPABASE_SECRET_KEYS") ?? "";
+  try {
+    const parsed = JSON.parse(raw);
+    if (typeof parsed === "string") return parsed;
+    if (Array.isArray(parsed)) return String(parsed[0]);
+    return String(parsed.default ?? Object.values(parsed)[0]);
+  } catch {
+    return raw;
+  }
+}
+const SERVICE_KEY = serviceKey();
 const DOMAIN = Deno.env.get("STUDENT_EMAIL_DOMAIN") ?? "students.gssunguwansarki.app";
 
 const cors = {
@@ -103,11 +116,8 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return json({ error: "Use POST" }, 405);
 
   // Who is calling?
-  const authHeader = req.headers.get("Authorization") ?? "";
-  const caller = createClient(SUPABASE_URL, ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-  });
-  const { data: u } = await caller.auth.getUser();
+  const jwt = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+  const { data: u } = await admin.auth.getUser(jwt);
   if (!u?.user) return json({ error: "Please log in again" }, 401);
 
   const { data: me } = await admin
