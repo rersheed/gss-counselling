@@ -1,0 +1,12 @@
+    role    |      full_name       | admission_no | class_name 
+------------+----------------------+--------------+------------
+ student    | Demo Student One     | DEMO/001     | SS2 A
+ student    | Demo Student Two     | DEMO/002     | SS1 B
+ counsellor | Mrs. Demo Counsellor |              | 
+(3 rows)
+
+ careers 
+---------
+      15
+(1 row)
+

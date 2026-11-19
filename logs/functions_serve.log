@@ -1,0 +1,8 @@
+Setting up Edge Functions runtime...
+2026-11-19T22:21:41.628756622Z Serving functions on http://127.0.0.1:54321/functions/v1/<function-name>
+2026-11-19T22:21:41.628818371Z  - http://127.0.0.1:54321/functions/v1/manage-users
+2026-11-19T22:21:41.628822045Z Using supabase-edge-runtime-1.79.1 (compatible with Deno v2.1.4)
+2026-11-19T22:22:00.912320097Z serving the request with supabase/functions/manage-users
+2026-11-19T22:25:21.594936305Z wall clock duration warning: isolate: 77102221-afa0-4914-9d5d-ce093128b79a
+2026-11-19T22:25:21.625463200Z early termination has been triggered: isolate: 77102221-afa0-4914-9d5d-ce093128b79a
+2026-11-19T22:29:53.273464487Z serving the request with supabase/functions/manage-users

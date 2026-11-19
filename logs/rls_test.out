@@ -1,0 +1,48 @@
+RESULT|SETUP|PASS|Four fictional test users created
+RESULT|SETUP2|PASS|Test cases created for the checks that follow
+RESULT|RLS01|PASS|Student opens cases (anonymous+urgent, named, career-linked) and sees exactly own 3
+RESULT|RLS02|PASS|Signed-in student can read published careers
+psql:testing_evidence/rls_test.sql:67: ERROR:  new row violates row-level security policy for table "careers"
+RESULT|RLS03|PASS|Student cannot add a career (blocked)
+
+RESULT|RLS04|PASS|Student updates own preferred stream and interests
+RESULT|RLS05|PASS|Student saves two careers and sees them
+RESULT|RLS06|PASS|Student records a mood check-in
+RESULT|RLS07|PASS|Student requests a session
+psql:testing_evidence/rls_test.sql:107: ERROR:  new row violates row-level security policy for table "appointments"
+RESULT|RLS08|PASS|Student cannot create an already-confirmed session (blocked)
+psql:testing_evidence/rls_test.sql:114: ERROR:  Not allowed
+CONTEXT:  PL/pgSQL function set_case_status(uuid,text) line 12 at RAISE
+RESULT|RLS09|PASS|Student cannot set a case to In progress (staff only; students may only close)
+RESULT|RLS10|PASS|Another student sees none of the cases, messages or saved careers of Student A
+psql:testing_evidence/rls_test.sql:131: ERROR:  new row violates row-level security policy for table "messages"
+RESULT|RLS11|PASS|Another student cannot write into the case of Student A (blocked)
+psql:testing_evidence/rls_test.sql:138: ERROR:  new row violates row-level security policy for table "messages"
+RESULT|RLS12|PASS|Student cannot impersonate a counsellor (blocked)
+RESULT|RLS13|PASS|Student sees only own student profile (not other students)
+psql:testing_evidence/rls_test.sql:153: ERROR:  Not allowed
+CONTEXT:  PL/pgSQL function staff_stats() line 5 at RAISE
+RESULT|RLS14|PASS|Student cannot read staff statistics (blocked)
+psql:testing_evidence/rls_test.sql:160: ERROR:  Not allowed
+CONTEXT:  PL/pgSQL function staff_inbox(text,uuid) line 4 at RAISE
+RESULT|RLS15|PASS|Student cannot read the staff inbox (blocked)
+RESULT|RLS16|PASS|Counsellor has no direct read access to the cases table
+RESULT|RLS17|PASS|Anonymous case shows only an alias to the counsellor (no name, class or career profile)
+RESULT|RLS18|PASS|Named career request shows student name, linked career and preferred stream
+RESULT|RLS19|PASS|Urgent case is listed first in the inbox
+RESULT|RLS20|PASS|Counsellor replies; reply carries the counsellor name
+
+RESULT|RLS21|PASS|Counsellor closes a case
+RESULT|RLS22|PASS|Counsellor confirms a session request
+RESULT|RLS23|PASS|Counsellor edits a career; editor is recorded
+RESULT|RLS24|PASS|Counsellor reads aggregate statistics including career requests
+psql:testing_evidence/rls_test.sql:246: ERROR:  Only the admin can do this
+CONTEXT:  PL/pgSQL function reveal_case_identity(uuid,text) line 4 at RAISE
+RESULT|RLS25|PASS|Counsellor cannot reveal an anonymous identity (admin only)
+RESULT|RLS26|PASS|Unpublished career is hidden from students
+RESULT|RLS27|PASS|Student sees the counsellor reply in own case
+psql:testing_evidence/rls_test.sql:271: ERROR:  new row violates row-level security policy for table "messages"
+RESULT|RLS28|PASS|Student cannot write into a closed case (blocked)
+Test Student A|TEST/001|SS2 A
+RESULT|RLS29|PASS|Administrator reveals identity with a reason, and the reveal is logged
+RESULT|RLS30|PASS|A user who is not signed in sees no careers, help lines or profiles

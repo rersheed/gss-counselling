@@ -1,0 +1,19 @@
+I/flutter ( 6058): STEP|TC01|PASS|934|Login screen is displayed
+I/flutter ( 6058): STEP|TC02|PASS|6719|Student logs in with admission number and PIN
+I/flutter ( 6058): STEP|TC03|PASS|8663|Student updates preferred stream and career interests
+I/flutter ( 6058): STEP|TC04|PASS|2526|Student browses career information filtered by stream
+I/flutter ( 6058): STEP|TC05|PASS|3763|Student views career details and saves the career
+I/flutter ( 6058): STEP|TC06|PASS|7046|Student submits a career guidance request
+I/flutter ( 6058): STEP|TC07|PASS|2458|Student sees the request in My chats
+I/flutter ( 6058): STEP|TC08|PASS|9608|Student requests a counselling session
+I/flutter ( 6058): STEP|TC09|PASS|2451|Student reads self-help tips
+I/flutter ( 6058): STEP|TC10|PASS|4421|Student opens the Get help now screen
+I/flutter ( 6058): STEP|TC11|PASS|3965|Student logs out
+I/flutter ( 6058): STEP|TC12|PASS|7872|Counsellor logs in with email and password
+I/flutter ( 6058): STEP|TC13|PASS|2677|Counsellor sees the career request in the inbox; anonymous case shows no name
+I/flutter ( 6058): STEP|TC14|PASS|5547|Counsellor replies to the career guidance request
+I/flutter ( 6058): STEP|TC15|PASS|8595|Counsellor confirms a session request
+I/flutter ( 6058): STEP|TC16|PASS|10967|Counsellor creates a student account and receives a PIN
+I/flutter ( 6058): STEP|TC17|PASS|5465|Counsellor opens career information management
+I/flutter ( 6058): STEP|TC18|PASS|4249|Counsellor logs out
+I/flutter ( 6058): STEP|TC19|PASS|10642|Student receives the counsellor reply and confirmed session
