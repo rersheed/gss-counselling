@@ -148,7 +148,11 @@ class InboxTile extends StatelessWidget {
             builder: (_) => ChatScreen(
               caseId: c.id,
               title: c.displayName,
-              subtitle: [c.className, topic.label, c.subject].whereType<String>().join(' · '),
+              subtitle: [c.className, c.careerTitle ?? topic.label, c.subject].whereType<String>().join(' · '),
+              studentContext: (c.preferredStream != null || c.careerInterests != null)
+                  ? 'Preferred stream: ${streamFor(c.preferredStream).label}'
+                      '${c.careerInterests == null ? '' : '\nInterests: ${c.careerInterests}'}'
+                  : null,
               topic: c.topic,
               status: c.status,
               isAnonymous: c.isAnonymous,
@@ -198,6 +202,8 @@ class InboxTile extends StatelessWidget {
             Wrap(spacing: 6, runSpacing: 6, children: [
               if (urgent) const Pill('Urgent', icon: Icons.priority_high_rounded, color: AppColors.danger, bg: AppColors.dangerSoft),
               Pill(topic.label, color: topic.color, bg: topic.soft),
+              if (c.careerTitle != null)
+                Pill(c.careerTitle!, icon: Icons.work_rounded, color: AppColors.amber, bg: AppColors.amberSoft),
               StatusPill(c.status),
               if (c.assignedName != null)
                 Pill(c.assignedName!, icon: Icons.person_rounded, color: AppColors.muted, bg: AppColors.background),

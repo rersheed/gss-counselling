@@ -16,6 +16,8 @@ class Profile {
   final String? gender;
   final String? phone;
   final bool isActive;
+  final String? preferredStream;
+  final String? careerInterests;
 
   Profile({
     required this.id,
@@ -26,6 +28,8 @@ class Profile {
     this.gender,
     this.phone,
     this.isActive = true,
+    this.preferredStream,
+    this.careerInterests,
   });
 
   bool get isStaff => role != UserRole.student;
@@ -41,6 +45,8 @@ class Profile {
         gender: m['gender'] as String?,
         phone: m['phone'] as String?,
         isActive: (m['is_active'] as bool?) ?? true,
+        preferredStream: m['preferred_stream'] as String?,
+        careerInterests: m['career_interests'] as String?,
       );
 }
 
@@ -81,6 +87,7 @@ class CaseItem {
   final String? lastMessagePreview;
   final String? lastSenderRole;
   final DateTime? studentLastReadAt;
+  final int? careerId;
 
   CaseItem.fromMap(Map<String, dynamic> m)
       : id = m['id'] as String,
@@ -92,7 +99,8 @@ class CaseItem {
         lastMessageAt = _dt(m['last_message_at']),
         lastMessagePreview = m['last_message_preview'] as String?,
         lastSenderRole = m['last_sender_role'] as String?,
-        studentLastReadAt = _dtn(m['student_last_read_at']);
+        studentLastReadAt = _dtn(m['student_last_read_at']),
+        careerId = (m['career_id'] as num?)?.toInt();
 
   bool get unread =>
       lastSenderRole == 'staff' &&
@@ -115,6 +123,9 @@ class InboxItem {
   final String? lastMessagePreview;
   final String? lastSenderRole;
   final bool unread;
+  final String? careerTitle;
+  final String? preferredStream;
+  final String? careerInterests;
 
   InboxItem.fromMap(Map<String, dynamic> m)
       : id = m['id'] as String,
@@ -130,7 +141,10 @@ class InboxItem {
         lastMessageAt = _dt(m['last_message_at']),
         lastMessagePreview = m['last_message_preview'] as String?,
         lastSenderRole = m['last_sender_role'] as String?,
-        unread = (m['unread'] as bool?) ?? false;
+        unread = (m['unread'] as bool?) ?? false,
+        careerTitle = m['career_title'] as String?,
+        preferredStream = m['preferred_stream'] as String?,
+        careerInterests = m['career_interests'] as String?;
 }
 
 class Message {
@@ -209,3 +223,72 @@ const moods = <Mood>[
   Mood(4, '🙂', 'Good', 'Nice! Keep doing what helps you feel this way.'),
   Mood(5, '😄', 'Great', "Wonderful! Share that energy with a friend today."),
 ];
+
+/// Subject streams used in Nigerian senior secondary schools.
+class SubjectStream {
+  final String key;
+  final String label;
+  final IconData icon;
+  final Color color;
+  final Color soft;
+  const SubjectStream(this.key, this.label, this.icon, this.color, this.soft);
+}
+
+const streams = <SubjectStream>[
+  SubjectStream('science', 'Science', Icons.science_rounded, AppColors.sky, AppColors.skySoft),
+  SubjectStream('arts', 'Arts', Icons.menu_book_rounded, AppColors.lilac, AppColors.lilacSoft),
+  SubjectStream('commercial', 'Commercial', Icons.storefront_rounded, AppColors.amber, AppColors.amberSoft),
+  SubjectStream('technical', 'Technical', Icons.build_rounded, Color(0xFF15A3A3), Color(0xFFE2F5F5)),
+];
+
+SubjectStream streamFor(String? key) => streams.firstWhere((s) => s.key == key,
+    orElse: () => const SubjectStream('undecided', 'Not decided yet', Icons.help_outline_rounded, AppColors.muted,
+        Color(0xFFEEF2EF)));
+
+/// A career in the school's career information library.
+class Career {
+  final int id;
+  final String title;
+  final String stream;
+  final String summary;
+  final String? whatTheyDo;
+  final List<String> ssceSubjects;
+  final String? studyPaths;
+  final List<String> skills;
+  final bool isPublished;
+
+  Career({
+    required this.id,
+    required this.title,
+    required this.stream,
+    required this.summary,
+    this.whatTheyDo,
+    this.ssceSubjects = const [],
+    this.studyPaths,
+    this.skills = const [],
+    this.isPublished = true,
+  });
+
+  factory Career.fromMap(Map<String, dynamic> m) => Career(
+        id: (m['id'] as num).toInt(),
+        title: m['title'] as String,
+        stream: m['stream'] as String,
+        summary: m['summary'] as String,
+        whatTheyDo: m['what_they_do'] as String?,
+        ssceSubjects: List<String>.from((m['ssce_subjects'] as List?) ?? const []),
+        studyPaths: m['study_paths'] as String?,
+        skills: List<String>.from((m['skills'] as List?) ?? const []),
+        isPublished: (m['is_published'] as bool?) ?? true,
+      );
+
+  Map<String, dynamic> toRow() => {
+        'title': title,
+        'stream': stream,
+        'summary': summary,
+        'what_they_do': whatTheyDo,
+        'ssce_subjects': ssceSubjects,
+        'study_paths': studyPaths,
+        'skills': skills,
+        'is_published': isPublished,
+      };
+}

@@ -72,6 +72,7 @@ class Api {
     required String body,
     required bool anonymous,
     required bool urgent,
+    int? careerId,
   }) async {
     final id = await db.rpc('open_case', params: {
       'p_topic': topic,
@@ -79,6 +80,7 @@ class Api {
       'p_body': body,
       'p_anonymous': anonymous,
       'p_urgent': urgent,
+      'p_career_id': careerId,
     });
     return id as String;
   }
@@ -114,6 +116,34 @@ class Api {
 
   static Future<void> cancelMyAppointment(String id) =>
       db.rpc('cancel_my_appointment', params: {'p_id': id});
+
+  static Future<void> updateMyProfile({String? stream, String? interests}) =>
+      db.rpc('update_my_profile', params: {'p_stream': stream ?? '', 'p_interests': interests ?? ''});
+
+  // ---------------- Careers ----------------
+  static Future<List<Career>> careers() async {
+    final rows = await db.from('careers').select().order('title');
+    return rows.map(Career.fromMap).toList();
+  }
+
+  static Future<Set<int>> mySavedCareerIds() async {
+    final rows = await db.from('saved_careers').select('career_id');
+    return rows.map((r) => (r['career_id'] as num).toInt()).toSet();
+  }
+
+  static Future<void> saveCareer(int id) => db.from('saved_careers').insert({'career_id': id});
+
+  static Future<void> unsaveCareer(int id) => db.from('saved_careers').delete().eq('career_id', id);
+
+  static Future<void> upsertCareer(Career c, {int? id}) async {
+    if (id == null) {
+      await db.from('careers').insert(c.toRow());
+    } else {
+      await db.from('careers').update(c.toRow()).eq('id', id);
+    }
+  }
+
+  static Future<void> deleteCareer(int id) => db.from('careers').delete().eq('id', id);
 
   // ---------------- Shared ----------------
   static Stream<List<Message>> messages(String caseId) => db

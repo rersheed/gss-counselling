@@ -5,10 +5,10 @@ import '../../models.dart';
 import '../../services/api.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
-import '../common/account_sheet.dart';
 import '../common/chat_screen.dart';
 import '../common/help_now_screen.dart';
 import 'new_case_screen.dart';
+import 'profile_screen.dart';
 
 class StudentHome extends StatefulWidget {
   final void Function(int tab) onGoTab;
@@ -92,7 +92,11 @@ class _StudentHomeState extends State<StudentHome> {
                 ]),
               ),
               GestureDetector(
-                onTap: () => showAccountSheet(context, me),
+                key: const ValueKey('profile-button'),
+                onTap: () async {
+                  await Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                  _load();
+                },
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   decoration: const BoxDecoration(color: Colors.white24, shape: BoxShape.circle),
@@ -180,16 +184,39 @@ class _StudentHomeState extends State<StudentHome> {
                   label: 'Book a session',
                   color: AppColors.sky,
                   bg: AppColors.skySoft,
-                  onTap: () => widget.onGoTab(2),
+                  onTap: () => widget.onGoTab(3),
                 ),
               ),
             ]),
+            const SizedBox(height: 12),
+            SoftCard(
+              key: const ValueKey('explore-careers'),
+              onTap: () => widget.onGoTab(2),
+              color: AppColors.amberSoft,
+              child: Row(children: [
+                const Icon(Icons.work_rounded, color: AppColors.amber, size: 30),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    const Text('Explore careers',
+                        style: TextStyle(fontWeight: FontWeight.w800, color: AppColors.ink)),
+                    Text(
+                      me.preferredStream == null || me.preferredStream == 'undecided'
+                          ? 'See jobs by Science, Arts, Commercial and Technical streams'
+                          : 'Careers for the ${streamFor(me.preferredStream).label} stream and more',
+                      style: const TextStyle(color: AppColors.muted, fontSize: 12.5),
+                    ),
+                  ]),
+                ),
+                const Icon(Icons.chevron_right_rounded, color: AppColors.amber),
+              ]),
+            ),
 
             // ---------- Next appointment ----------
             if (_next != null) ...[
               const SectionTitle('Your next session'),
               SoftCard(
-                onTap: () => widget.onGoTab(2),
+                onTap: () => widget.onGoTab(3),
                 child: Row(children: [
                   Container(
                     width: 54,

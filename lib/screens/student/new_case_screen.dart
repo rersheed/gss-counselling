@@ -9,7 +9,9 @@ import '../common/chat_screen.dart';
 class NewCaseScreen extends StatefulWidget {
   final String? topic;
   final bool urgent;
-  const NewCaseScreen({super.key, this.topic, this.urgent = false});
+  final int? careerId;
+  final String? subject;
+  const NewCaseScreen({super.key, this.topic, this.urgent = false, this.careerId, this.subject});
 
   @override
   State<NewCaseScreen> createState() => _NewCaseScreenState();
@@ -17,7 +19,7 @@ class NewCaseScreen extends StatefulWidget {
 
 class _NewCaseScreenState extends State<NewCaseScreen> {
   final _form = GlobalKey<FormState>();
-  final _subject = TextEditingController();
+  late final _subject = TextEditingController(text: widget.subject);
   final _body = TextEditingController();
   late String? _topic = widget.topic;
   late bool _urgent = widget.urgent;
@@ -45,6 +47,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         body: _body.text.trim(),
         anonymous: _anon,
         urgent: _urgent,
+        careerId: widget.careerId,
       );
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -70,7 +73,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_urgent ? 'Urgent message' : 'New conversation')),
+      appBar: AppBar(
+          title: Text(_urgent
+              ? 'Urgent message'
+              : widget.careerId != null
+                  ? 'Career guidance request'
+                  : 'New conversation')),
       body: Form(
         key: _form,
         child: ListView(padding: const EdgeInsets.fromLTRB(18, 4, 18, 30), children: [
@@ -96,6 +104,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
           ]),
           const SizedBox(height: 20),
           TextFormField(
+            key: const ValueKey('case-subject'),
             controller: _subject,
             maxLength: 120,
             textCapitalization: TextCapitalization.sentences,
@@ -104,6 +113,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
           ),
           const SizedBox(height: 8),
           TextFormField(
+            key: const ValueKey('case-body'),
             controller: _body,
             minLines: 5,
             maxLines: 10,
@@ -136,6 +146,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
           ),
           const SizedBox(height: 22),
           FilledButton.icon(
+            key: const ValueKey('send-case'),
             onPressed: _busy ? null : _submit,
             style: _urgent ? FilledButton.styleFrom(backgroundColor: AppColors.danger) : null,
             icon: const Icon(Icons.send_rounded),

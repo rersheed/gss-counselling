@@ -126,6 +126,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: InboxTile(c, onChanged: _load),
                     ),
                 ],
+                const SectionTitle('Career guidance'),
+                SoftCard(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                    Row(children: [
+                      _mini('Careers in library', _n('careers')),
+                      _mini('Career requests (30 days)', _n('career_requests_30d')),
+                    ]),
+                    const SizedBox(height: 12),
+                    const Text('Most saved careers', style: TextStyle(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 4),
+                    _topCareers(),
+                    const SizedBox(height: 12),
+                    const Text('Students by preferred stream', style: TextStyle(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 4),
+                    _streamBars(),
+                  ]),
+                ),
                 const SectionTitle('How students feel (last 7 days)'),
                 SoftCard(child: _moodBars()),
                 const SectionTitle('Topics (last 30 days)'),
@@ -190,6 +207,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Column(children: [
       for (final x in moods.reversed)
         _bar(x.label, counts[x.value]!, max, colors[x.value - 1], lead: Text(x.emoji, style: const TextStyle(fontSize: 18))),
+    ]);
+  }
+
+  Widget _topCareers() {
+    final list = ((_stats?['top_careers'] as List?) ?? const [])
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .toList();
+    if (list.isEmpty) return const Text('No careers saved yet.', style: TextStyle(color: AppColors.muted));
+    final max = (list.first['n'] as num).toInt();
+    return Column(children: [
+      for (final e in list) _bar(e['title'] as String, (e['n'] as num).toInt(), max, AppColors.amber),
+    ]);
+  }
+
+  Widget _streamBars() {
+    final m = Map<String, dynamic>.from((_stats?['streams'] as Map?) ?? {});
+    if (m.isEmpty) return const Text('No students yet.', style: TextStyle(color: AppColors.muted));
+    final entries = m.entries.map((e) => MapEntry(e.key, (e.value as num).toInt())).toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    final max = entries.first.value;
+    return Column(children: [
+      for (final e in entries)
+        _bar(e.key == 'not set' ? 'Not set' : streamFor(e.key).label, e.value, max, streamFor(e.key).color),
     ]);
   }
 

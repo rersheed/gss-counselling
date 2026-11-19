@@ -35,6 +35,12 @@ class CounsellingApp extends StatelessWidget {
 class Me {
   static Profile? _current;
   static Profile of(BuildContext context) => _current!;
+
+  /// Refresh after the user edits their own profile.
+  static Future<void> reload() async {
+    final p = await AuthService.loadMyProfile();
+    if (p != null) _current = p;
+  }
 }
 
 /// Decides which screen to show: login, student app or counsellor app.

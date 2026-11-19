@@ -16,6 +16,7 @@ class ChatScreen extends StatefulWidget {
   final bool isAnonymous;
   final bool isUrgent;
   final String? subtitle;
+  final String? studentContext;
 
   const ChatScreen({
     super.key,
@@ -26,6 +27,7 @@ class ChatScreen extends StatefulWidget {
     required this.isAnonymous,
     required this.isUrgent,
     this.subtitle,
+    this.studentContext,
   });
 
   @override
@@ -194,6 +196,8 @@ class _ChatScreenState extends State<ChatScreen> {
         if (_urgent)
           _banner(Icons.priority_high_rounded, AppColors.danger, AppColors.dangerSoft,
               me.isStaff ? 'Marked urgent by the student — please respond quickly.' : 'Marked urgent. The counsellor will reply as soon as possible.'),
+        if (me.isStaff && widget.studentContext != null)
+          _banner(Icons.work_rounded, AppColors.amber, AppColors.amberSoft, widget.studentContext!),
         if (widget.isAnonymous)
           _banner(Icons.visibility_off_rounded, AppColors.lilac, AppColors.lilacSoft,
               me.isStaff
@@ -254,6 +258,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
             Expanded(
               child: TextField(
+                key: const ValueKey('chat-input'),
                 controller: _text,
                 minLines: 1,
                 maxLines: 5,
@@ -271,6 +276,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             const SizedBox(width: 8),
             IconButton.filled(
+              key: const ValueKey('chat-send'),
               onPressed: _sending ? null : () => _send(me),
               style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
               icon: _sending

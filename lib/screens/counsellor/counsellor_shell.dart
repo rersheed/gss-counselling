@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../common/careers_screen.dart';
 import 'dashboard_screen.dart';
 import 'inbox_screen.dart';
 import 'manage_appointments_screen.dart';
@@ -27,6 +28,7 @@ class _CounsellorShellState extends State<CounsellorShell> {
       InboxScreen(key: ValueKey('inbox$_refresh')),
       ManageAppointmentsScreen(key: ValueKey('appts$_refresh')),
       const StudentsScreen(),
+      CareersScreen(key: ValueKey('careers$_refresh')),
     ];
     return Scaffold(
       body: IndexedStack(index: _tab, children: pages),
@@ -42,6 +44,8 @@ class _CounsellorShellState extends State<CounsellorShell> {
           NavigationDestination(icon: Icon(Icons.event_outlined), selectedIcon: Icon(Icons.event_rounded), label: 'Sessions'),
           NavigationDestination(
               icon: Icon(Icons.groups_outlined), selectedIcon: Icon(Icons.groups_rounded), label: 'Students'),
+          NavigationDestination(
+              icon: Icon(Icons.work_outline_rounded), selectedIcon: Icon(Icons.work_rounded), label: 'Careers'),
         ],
       ),
     );

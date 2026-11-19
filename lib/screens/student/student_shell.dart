@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../common/careers_screen.dart';
 import 'my_cases_screen.dart';
 import 'student_appointments_screen.dart';
 import 'student_home.dart';
@@ -26,6 +27,7 @@ class _StudentShellState extends State<StudentShell> {
     final pages = [
       StudentHome(key: ValueKey('home$_refresh'), onGoTab: go),
       MyCasesScreen(key: ValueKey('cases$_refresh')),
+      CareersScreen(key: ValueKey('careers$_refresh')),
       StudentAppointmentsScreen(key: ValueKey('appts$_refresh')),
       const TipsScreen(),
     ];
@@ -38,6 +40,8 @@ class _StudentShellState extends State<StudentShell> {
           NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded), label: 'Home'),
           NavigationDestination(
               icon: Icon(Icons.chat_bubble_outline_rounded), selectedIcon: Icon(Icons.chat_bubble_rounded), label: 'Chats'),
+          NavigationDestination(
+              icon: Icon(Icons.work_outline_rounded), selectedIcon: Icon(Icons.work_rounded), label: 'Careers'),
           NavigationDestination(
               icon: Icon(Icons.event_outlined), selectedIcon: Icon(Icons.event_rounded), label: 'Sessions'),
           NavigationDestination(

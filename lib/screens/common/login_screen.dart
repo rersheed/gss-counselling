@@ -120,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                key: const ValueKey('login-id'),
                 controller: _id,
                 keyboardType: _staff ? TextInputType.emailAddress : TextInputType.text,
                 textCapitalization: _staff ? TextCapitalization.none : TextCapitalization.characters,
@@ -131,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 14),
               TextFormField(
+                key: const ValueKey('login-secret'),
                 controller: _secret,
                 obscureText: _hide,
                 keyboardType: _staff ? TextInputType.visiblePassword : TextInputType.number,
@@ -153,6 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 22),
               FilledButton(
+                key: const ValueKey('login-button'),
                 onPressed: _busy ? null : _submit,
                 child: _busy
                     ? const SizedBox(
