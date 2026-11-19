@@ -14,7 +14,8 @@ import 'package:gss_counselling/main.dart' as app;
 import 'package:gss_counselling/widgets/common.dart' show SoftCard;
 import 'package:integration_test/integration_test.dart';
 
-final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+// Must be created first in main(), before testWidgets builds a default binding.
+late final IntegrationTestWidgetsFlutterBinding binding;
 final results = <Map<String, Object>>[];
 late WidgetTester t;
 
@@ -82,6 +83,7 @@ Future<void> login({required bool staff, required String id, required String sec
 }
 
 void main() {
+  binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('Full student and counsellor journey', (tester) async {
     t = tester;
     app.main();

@@ -88,11 +88,11 @@ jobs:
         if: always()
         run: |
           set +e
-          supabase db reset > evidence/logs/db_reset_1.log 2>&1
-          psql "$DB_URL" -v ON_ERROR_STOP=0 -f testing_evidence/rls_core_test.sql > evidence/logs/rls_core_test.out 2>&1
-          supabase db reset > evidence/logs/db_reset_2.log 2>&1
-          psql "$DB_URL" -v ON_ERROR_STOP=0 -f testing_evidence/rls_careers_test.sql > evidence/logs/rls_careers_test.out 2>&1
-          for f in evidence/logs/rls_*.out; do tail -n 5 "$f"; done
+          supabase db reset > evidence/logs/db_reset.log 2>&1
+          psql "$DB_URL" -v ON_ERROR_STOP=0 -f testing_evidence/rls_test.sql > evidence/logs/rls_test.out 2>&1
+          grep '^RESULT|' evidence/logs/rls_test.out > evidence/logs/rls_results.txt
+          cat evidence/logs/rls_results.txt
+          echo "PASS: $(grep -c '|PASS|' evidence/logs/rls_results.txt)  FAIL: $(grep -c '|FAIL|' evidence/logs/rls_results.txt)"
 
       - name: Device and timing information
         if: always()
