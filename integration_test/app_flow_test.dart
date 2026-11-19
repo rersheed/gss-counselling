@@ -290,7 +290,7 @@ void main() {
       await shot('24_student_session_confirmed');
     });
 
-    binding.reportData = {'steps': results};
+    binding.reportData = {...?binding.reportData, 'steps': results};
     // Failures are reported through the STEP| lines (ci/run_e2e.sh fails the job);
     // the test itself passes so the driver still saves every screenshot.
   });
